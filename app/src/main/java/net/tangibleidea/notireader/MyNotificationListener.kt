@@ -27,11 +27,13 @@ class MyNotificationListener : NotificationListenerService() {
             val text = extras.getString(Notification.EXTRA_TEXT) ?: "No message"
             val packageName = notification.packageName
 
-            val newNotification = NotificationData(title, text, packageName)
-            Log.d("NotificationListener", "Received: $newNotification")
+            if(packageName == "com.google.android.apps.messaging") {
+                val newNotification = NotificationData(title, text, packageName)
+                Log.d("NotificationListener", "Received: $newNotification")
 
-            // Add to ViewModel list
-            addNotification(newNotification)
+                // new message.
+                addNotification(newNotification)
+            }
         }
     }
 
